@@ -1,4 +1,4 @@
-import LiquidationLogic
+import model.LiquidationLogic as LiquidationLogic
 
 # Obtener los datos de entrada
 try:

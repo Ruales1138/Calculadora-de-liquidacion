@@ -1,5 +1,5 @@
 import unittest
-import LiquidationLogic
+import model.LiquidationLogic as LiquidationLogic
 
 class TestLiquidationLogic(unittest.TestCase):
     
