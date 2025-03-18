@@ -38,3 +38,21 @@ para ejecutar el programa desde la consola: ui/console.py
 ejecucion pruebas unitarias: 
 para ejecutar las pruebas unitarias, desde la carpeta raiz se utiliza el comando: python -m unittest tests.test_logic o simplemente ve al simbolo de pruebas en visual y dale a correr para asegurarte de que todas las pruebas funcionen correctamente.
 
+
+## Escenarios Específicos para calcular liquidacion definitiva
+
+## Casos Normales
+1. liquidacion basica
+   entradas
+   * salario: 2000000 + 140606
+   * dias: 365
+   salida: 
+
+2. liquidacion sin auxilio de transporte
+   entradas:
+   * salario: 
+   * dias:
+   salida:
+
+
+
