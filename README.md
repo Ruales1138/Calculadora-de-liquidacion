@@ -43,16 +43,34 @@ para ejecutar las pruebas unitarias, desde la carpeta raiz se utiliza el comando
 
 ## Casos Normales
 1. liquidacion basica
-   entradas
-   * salario: 2000000 + 140606
-   * dias: 365
-   salida: 
+   entradas:
+   * salario: 2000000
+   * dias: 180
+   salida: 2620000
 
 2. liquidacion sin auxilio de transporte
    entradas:
-   * salario: 
-   * dias:
-   salida:
+   * salario: 3300000
+   * dias: 164
+   salida: 3938733
+
+## Casos Extraordinarios
+1. entradas:
+   * salario: 18000000
+   * dias: 221
+   salida: 28951000
+
+2. entradas:
+   * salario: 25000000
+   * dias: 195
+   salida: 3529722
+
+3. entradas:
+   * salario: 20000000
+   * dias: 214
+   salida: 31148888
+
+## Casos De Error
 
 
 
