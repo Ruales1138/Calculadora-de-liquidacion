@@ -39,38 +39,4 @@ ejecucion pruebas unitarias:
 para ejecutar las pruebas unitarias, desde la carpeta raiz se utiliza el comando: python -m unittest tests.test_logic o simplemente ve al simbolo de pruebas en visual y dale a correr para asegurarte de que todas las pruebas funcionen correctamente.
 
 
-## Escenarios Específicos para calcular liquidacion definitiva
-
-## Casos Normales
-1. liquidacion basica
-   entradas:
-   * salario: 2000000
-   * dias: 180
-salida: 2620000
-
-2. liquidacion sin auxilio de transporte
-   entradas:
-   * salario: 3300000
-   * dias: 164
-salida: 3938733
-
-## Casos Extraordinarios
-1. entradas:
-   * salario: 18000000
-   * dias: 221
-salida: 28951000
-
-2. entradas:
-   * salario: 25000000
-   * dias: 195
-salida: 3529722
-
-3. entradas:
-   * salario: 20000000
-   * dias: 214
-salida: 31148888
-
-## Casos De Error
-
-
 
