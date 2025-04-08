@@ -14,8 +14,8 @@ sys.path.append("src")
 from model.PaymentLogic import PaymentLogic_Calculator
 
 resource_add_path('fonts')
-
-
+class Datos_error (Exception):
+    pass
 
 class ResultadosScreen(Screen):
     def __init__(self, **kwargs):
@@ -125,6 +125,27 @@ class PaymentLogic(App):
                 self.resultados_screen.mostrar_resultados(" Error: Por favor completa todos los campos.")
                 self.screen_manager.current = "resultados"
                 return
+            
+            if not self.Salario_input.text.isnumeric():
+                raise Datos_error("Ingrese valor Númerico")
+            
+            if not self.aux_transporte_input.text.isnumeric():
+                raise Datos_error("Ingrese valor númerico") 
+            
+            if not self.fecha_inicio_contrato_input.text.isnumeric():
+                raise Datos_error() 
+            
+            if not self.fecha_finalizacion_contrato_input.text.isnumeric():
+                raise Datos_error() 
+            
+            if not self.dias_vacaciones_no_gozadas_input.text.isnumeric():
+                raise Datos_error() 
+            
+            if not self.dias_primas_input.text.isnumeric():
+                raise Datos_error() 
+            
+            if not self.dias_cesantias_input.text.isnumeric():
+                raise Datos_error() 
 
             salario = float(self.Salario_input.text)
             auxilio = float(self.aux_transporte_input.text)
