@@ -16,6 +16,7 @@ from model.PaymentLogic import PaymentLogic_Calculator
 resource_add_path('fonts')
 
 
+
 class ResultadosScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -88,6 +89,8 @@ class PaymentLogic(App):
         self.dias_primas_input = agregar_campo("Días de primas:", "Ej: 180")
         self.dias_cesantias_input = agregar_campo("Días de cesantías:", "Ej: 180")
 
+    
+
         self.calcular_button = Button(
             text="Calcular Liquidación",
             size_hint_y=None,
@@ -155,6 +158,7 @@ class PaymentLogic(App):
 
             self.resultados_screen.mostrar_resultados(resultado_text)
             self.screen_manager.current = "resultados"
+
 
         except Exception as e:
             print("Error durante el cálculo:", e)
