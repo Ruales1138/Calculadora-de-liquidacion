@@ -9,17 +9,24 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.utils import get_color_from_hex
 from kivy.resources import resource_add_path
+from datetime import datetime
 import sys
+
 sys.path.append("src")
 from model.PaymentLogic import PaymentLogic_Calculator
 
 resource_add_path('fonts')
-class Datos_error (Exception):
+
+
+class Datos_error(Exception):
     pass
+
 
 class ResultadosScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+
         layout = BoxLayout(orientation='vertical', padding=40)
         self.resultados_label = Label(
             text="", halign='left', valign='top', font_size=16,
@@ -29,8 +36,48 @@ class ResultadosScreen(Screen):
         self.add_widget(layout)
         Window.clearcolor = get_color_from_hex('#1E1E2F')
 
+
     def mostrar_resultados(self, resultados_text):
         self.resultados_label.text = resultados_text
+
+
+
+class ResultadosScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
+        
+        # Etiqueta de resultados
+        self.resultados_label = Label(
+            text="", halign='left', valign='top', font_size=16,
+            color=get_color_from_hex('#FFFFFF')
+        )
+        layout.add_widget(self.resultados_label)
+
+        # Botón para volver al formulario
+        self.volver_button = Button(
+            text="Volver al formulario",
+            size_hint_y=None,
+            height=50,
+            background_color=get_color_from_hex('#0091EA'),
+            color=get_color_from_hex('#FFFFFF'),
+            font_size=16,
+            bold=True
+        )
+        self.volver_button.bind(on_press=self.volver_a_formulario)
+        layout.add_widget(self.volver_button)
+
+        self.add_widget(layout)
+        Window.clearcolor = get_color_from_hex('#1E1E2F')
+
+    def mostrar_resultados(self, resultados_text):
+        self.resultados_label.text = resultados_text
+
+    def volver_a_formulario(self, instance):
+        # Volver a la pantalla de ingreso
+        self.manager.current = "ingreso"
+
+
 
 
 class PaymentLogic(App):
@@ -41,7 +88,6 @@ class PaymentLogic(App):
         main_layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
         Window.clearcolor = get_color_from_hex('#1E1E2F')
 
-        # Cabecera
         header = Label(
             text=" Calculadora de Liquidación ",
             font_size=24,
@@ -52,7 +98,6 @@ class PaymentLogic(App):
         )
         main_layout.add_widget(header)
 
-        # Scroll
         scroll = ScrollView()
         self.ingreso_layout = GridLayout(cols=1, spacing=15, size_hint_y=None)
         self.ingreso_layout.bind(minimum_height=self.ingreso_layout.setter('height'))
@@ -81,6 +126,8 @@ class PaymentLogic(App):
             self.ingreso_layout.add_widget(input_box)
             return input_box
 
+
+
         self.Salario_input = agregar_campo("Ingrese su salario base:", "Ej: 1500000")
         self.aux_transporte_input = agregar_campo("Ingrese el auxilio de transporte:", "Ej: 140606")
         self.fecha_inicio_contrato_input = agregar_campo("Fecha inicio del contrato (dd/mm/yyyy):", "Ej: 01/01/2023")
@@ -89,7 +136,7 @@ class PaymentLogic(App):
         self.dias_primas_input = agregar_campo("Días de primas:", "Ej: 180")
         self.dias_cesantias_input = agregar_campo("Días de cesantías:", "Ej: 180")
 
-    
+
 
         self.calcular_button = Button(
             text="Calcular Liquidación",
@@ -110,6 +157,15 @@ class PaymentLogic(App):
 
         return self.screen_manager
 
+
+
+    def validar_fecha(self, texto):
+        try:
+            datetime.strptime(texto, "%d/%m/%Y")
+            return True
+        except ValueError:
+            return False
+
     def calcular(self, instance):
         try:
             campos = [
@@ -125,27 +181,29 @@ class PaymentLogic(App):
                 self.resultados_screen.mostrar_resultados(" Error: Por favor completa todos los campos.")
                 self.screen_manager.current = "resultados"
                 return
-            
+
             if not self.Salario_input.text.isnumeric():
-                raise Datos_error("Ingrese valor Númerico")
-            
+                raise Datos_error("Error: El salario debe ser un número.")
+
             if not self.aux_transporte_input.text.isnumeric():
-                raise Datos_error("Ingrese valor númerico") 
-            
-            if not self.fecha_inicio_contrato_input.text.isnumeric():
-                raise Datos_error() 
-            
-            if not self.fecha_finalizacion_contrato_input.text.isnumeric():
-                raise Datos_error() 
-            
+                raise Datos_error("Error: El auxilio de transporte debe ser un número.")
+
+            if not self.validar_fecha(self.fecha_inicio_contrato_input.text):
+                raise Datos_error("Error: Fecha de inicio no válida. Usa el formato dd/mm/yyyy.")
+
+            if not self.validar_fecha(self.fecha_finalizacion_contrato_input.text):
+                raise Datos_error("Error: Fecha de finalización no válida. Usa el formato dd/mm/yyyy.")
+
             if not self.dias_vacaciones_no_gozadas_input.text.isnumeric():
-                raise Datos_error() 
-            
+                raise Datos_error("Error: Los días de vacaciones deben ser numéricos.")
+
             if not self.dias_primas_input.text.isnumeric():
-                raise Datos_error() 
-            
+                raise Datos_error("Error: Los días de primas deben ser numéricos.")
+
             if not self.dias_cesantias_input.text.isnumeric():
-                raise Datos_error() 
+                raise Datos_error("Error: Los días de cesantías deben ser numéricos.")
+
+
 
             salario = float(self.Salario_input.text)
             auxilio = float(self.aux_transporte_input.text)
@@ -165,6 +223,7 @@ class PaymentLogic(App):
                 dias_cesantias=dias_cesantias
             )
 
+
             resultado_text = (
                 f" Días Trabajados: {calculadora.dias_trabajados}\n"
                 f" Años de servicio: {calculadora.calcular_anos_servicio():,.2f}\n"
@@ -180,9 +239,13 @@ class PaymentLogic(App):
             self.resultados_screen.mostrar_resultados(resultado_text)
             self.screen_manager.current = "resultados"
 
-
+        except Datos_error as e:
+            self.resultados_screen.mostrar_resultados(str(e))
+            self.screen_manager.current = "resultados"
         except Exception as e:
-            print("Error durante el cálculo:", e)
+            self.resultados_screen.mostrar_resultados("Error durante el cálculo. Verifica los datos.")
+            self.screen_manager.current = "resultados"
+            print("Error:", e)
 
 
 if __name__ == "__main__":
