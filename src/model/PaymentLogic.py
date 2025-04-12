@@ -1,6 +1,6 @@
 from datetime import datetime
 
-class PaymentLogic:
+class PaymentLogic_Calculator:
     def __init__(self, salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias):
         self.salario_base = salario_base
         self.aux_transporte = aux_transporte

@@ -2,7 +2,7 @@ import sys
 sys.path.append("src")  
 
 import unittest
-from model.PaymentLogic import PaymentLogic  
+from model.PaymentLogic import PaymentLogic_Calculator  
   
 
 class PaymentTest(unittest.TestCase):
@@ -21,7 +21,7 @@ class PaymentTest(unittest.TestCase):
         dias_prima = 180
         dias_cesantias = 180
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreater(resultado, 0)
@@ -36,7 +36,7 @@ class PaymentTest(unittest.TestCase):
         dias_prima = 90
         dias_cesantias = 90
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreater(resultado, 0)
@@ -52,7 +52,7 @@ class PaymentTest(unittest.TestCase):
         dias_cesantias = 180
 
         with self.assertRaises(ValueError):  # Corrección: ValueError en vez de InvalidDateException
-            PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
+            PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
 
     def test_liquidacion_sin_derechos(self):
         """Prueba sin días de vacaciones, prima o cesantías."""
@@ -64,7 +64,7 @@ class PaymentTest(unittest.TestCase):
         dias_prima = 0
         dias_cesantias = 0
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreaterEqual(resultado, 0)  # Se cambia a `assertGreaterEqual` en caso de cálculos pequeños
@@ -77,7 +77,7 @@ class PaymentTest(unittest.TestCase):
         fecha_inicio = "01/01/2023"
         fecha_fin = "30/06/2023"
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 180, 180)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 180, 180)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreater(resultado, 0)
@@ -89,7 +89,7 @@ class PaymentTest(unittest.TestCase):
         fecha_inicio = "01/01/2023"
         fecha_fin = "14/06/2023"
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 164, 164)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 164, 164)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreater(resultado, 0)
@@ -101,7 +101,7 @@ class PaymentTest(unittest.TestCase):
         fecha_inicio = "01/01/2023"
         fecha_fin = "10/08/2023"
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 221, 221)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 221, 221)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreater(resultado, 0)
@@ -113,7 +113,7 @@ class PaymentTest(unittest.TestCase):
         fecha_inicio = "01/01/2023"
         fecha_fin = "14/07/2023"
         
-        logic = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 194, 194)
+        logic = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, 0, 194, 194)
         resultado = logic.calcular_total_liquidacion()
         
         self.assertGreater(resultado, 0)

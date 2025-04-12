@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from model.PaymentLogic import PaymentLogic
+from model.PaymentLogic import PaymentLogic_Calculator
 
 def solicitar_dato(mensaje, tipo=float, positivo=True):
     """Solicita un dato al usuario y lo convierte al tipo especificado, validando su formato."""
@@ -40,7 +40,7 @@ def main():
         dias_cesantias = solicitar_dato("Ingrese los días de cesantías: ")
 
         # Instanciar lógica de pago
-        liquidacion = PaymentLogic(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
+        liquidacion = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
 
         # Mostrar resultados de manera ordenada
         print("\n=== Resumen de Liquidación ===\n")
