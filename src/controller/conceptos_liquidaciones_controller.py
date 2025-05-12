@@ -3,30 +3,27 @@ sys.path.append( "src" )
 
 import psycopg2
 
-from model2.conceptos_liquidaciones import Usuario
-import SecretConfig
+from model2.conceptos_liquidaciones import Conceptos_liquidaciones
+import model2.SecretConfig as SecretConfig
 
-class ControladorUsuarios :
+class ControladorConceptosLiquidaciones :
 
     def CrearTabla():
         """ Crea la tabla de usuario en la BD """
-        cursor = ControladorUsuarios.ObtenerCursor()
+        cursor = ControladorConceptosLiquidaciones.ObtenerCursor()
 
-        cursor.execute("""create table usuarios (
-  cedula varchar( 20 )  NOT NULL PRIMARY KEY
-  nombre text not null,
-  apellido text not null,
-  telefono varchar(20),
-  correo text,
-  direccion text not null,
-  codigo_municipio varchar(40) not null,
-  codigo_departamento varchar(40) NOT NULL
+        cursor.execute("""CREATE TABLE conceptos_liquidacion (
+    id SERIAL PRIMARY KEY,
+    liquidacion_id INT,
+    concepto VARCHAR(100),
+    monto DECIMAL(10,2),
+    FOREIGN KEY (liquidacion_id) REFERENCES liquidaciones(id)
 ); """)
         cursor.connection.commit()
 
     def EliminarTabla():
         """ Borra la tabla de usuarios de la BD """
-        cursor = ControladorUsuarios.ObtenerCursor()
+        cursor = ControladorConceptosLiquidaciones.ObtenerCursor()
 
         cursor.execute("""drop table usuarios""" )
         # Confirma los cambios realizados en la base de datos
@@ -34,27 +31,24 @@ class ControladorUsuarios :
         cursor.connection.commit()
 
 
-    def InsertarUsuario( usuario : Usuario ):
-        """ Recibe un a instancia de la clase Usuario y la inserta en la tabla respectiva"""
-        cursor = ControladorUsuarios.ObtenerCursor()
-        cursor.execute( f"""insert into usuarios (cedula, nombre, apellido, 
-                            direccion, telefono, 
-                            codigo_municipio, codigo_departamento) 
-                        values ('{usuario.cedula}', '{usuario.nombre}', '{usuario.apellido}',  
-                            '{usuario.direccion}', '{usuario.telefono}',
-                            '{usuario.codigo_municipio}', 'usuario.codigo_departamento')""" )
+    def InsertarConceptosLiquidaciones( ConceptosLiquidaciones : Conceptos_liquidaciones ):
+        """ Recibe un a instancia de la clase Conceptos_liquidaciones y la inserta en la tabla respectiva"""
+        cursor = ControladorConceptosLiquidaciones.ObtenerCursor()
+        cursor.execute( f"""insert into concepto_liquidaciones (id, liquidacion_id, concepto, 
+                            monto) 
+                        values ('{ConceptosLiquidaciones.id}', '{ConceptosLiquidaciones.liquidacion_id}', '{ConceptosLiquidaciones.concepto}',  
+                            '{ConceptosLiquidaciones.monto}')""" )
 
         cursor.connection.commit()
 
-    def BuscarUsuarioCedula( cedula ):
+    def BuscarUsuarioId( id ):
         """ Trae un usuario de la tabla de usuarios por la cedula """
-        cursor = ControladorUsuarios.ObtenerCursor()
+        cursor = ControladorConceptosLiquidaciones.ObtenerCursor()
 
-        cursor.execute(f"""select cedula, nombre, apellido, direccion, correo, telefono, codigo_departamento, codigo_municipio
-        from usuarios where cedula = '{cedula}'""" )
+        cursor.execute(f"""select id, liquidacion_id, concepto, monto
+        from conceptos_liquidaciones where id = '{id}'""" )
         fila = cursor.fetchone()
-        resultado = Usuario( cedula=fila[0], nombre=fila[1], apellido=fila[2], direccion=fila[3], correo=fila[4]
-                            telefono=fila[5],codigo_departamento=fila[6], codigo_municipio=fila[7],   )
+        resultado = Conceptos_liquidaciones( id=fila[0], liquidacion_id=fila[1], concepto=fila[2], monto=fila[3]  )
         return resultado
 
     def ObtenerCursor():

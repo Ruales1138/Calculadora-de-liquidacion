@@ -1,6 +1,6 @@
 drop table empleados;
 CREATE TABLE empleados (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
     apellido VARCHAR(100),
     cedula VARCHAR(20) UNIQUE,

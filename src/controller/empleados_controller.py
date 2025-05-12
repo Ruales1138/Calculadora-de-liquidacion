@@ -4,7 +4,7 @@ sys.path.append( "src" )
 import psycopg2
 
 from model2.empleados import Empleado
-import SecretConfig
+import model2.SecretConfig as SecretConfig
 
 class ControladorEmpleado :
 
@@ -12,7 +12,7 @@ class ControladorEmpleado :
         cursor = ControladorEmpleado.ObtenerCursor()
 
         cursor.execute("""CREATE TABLE empleados (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
     apellido VARCHAR(100),
     cedula VARCHAR(20) UNIQUE,
@@ -48,9 +48,9 @@ class ControladorEmpleado :
         cursor = ControladorEmpleado.ObtenerCursor()
 
         cursor.execute(f"""select id, nombre, apellido, cedula, fecha_ingreso, salario, cargo
-        from usuarios where cedula = '{id}'""" )
+        from empleados where id = '{id}'""" )
         fila = cursor.fetchone()
-        resultado = Empleado ( id=fila[0], nombre=fila[1], apellido=fila[2], cedula=fila[3], fecha_ingreso=fila[4], salario=fila[5],cargo=fila[6],  )
+        resultado = Empleado ( id=fila[0], nombre=fila[1], apellido=fila[2], cedula=fila[3], fecha_ingreso=fila[4], salario=fila[5],cargo=fila[6]  )
         return resultado
 
     def ObtenerCursor():

@@ -1,6 +1,6 @@
 drop table liquidaciones;
 CREATE TABLE liquidaciones (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id SERIAL PRIMARY KEY,
     empleado_id INT,
     fecha_salida DATE,
     fecha_calculo DATE,
