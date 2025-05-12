@@ -1,4 +1,4 @@
-drop table conceptos_liquidaciones;
+drop table conceptos_liquidacion;
 CREATE TABLE conceptos_liquidacion (
     id INT PRIMARY KEY AUTO_INCREMENT,
     liquidacion_id INT,

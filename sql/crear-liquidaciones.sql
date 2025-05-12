@@ -1,3 +1,4 @@
+drop table liquidaciones;
 CREATE TABLE liquidaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     empleado_id INT,
