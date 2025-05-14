@@ -31,7 +31,7 @@ class ControladorEmpleado :
         cursor.connection.commit()
 
 
-    def InsertarUsuario( empleado : Empleado ):
+    def InsertarEmpleado( empleado : Empleado ):
         """ Recibe un a instancia de la clase Empleado y la inserta en la tabla respectiva"""
         cursor = ControladorEmpleado.ObtenerCursor()
         cursor.execute( f"""insert into usuarios (id, nombre, apellido, 
@@ -52,6 +52,16 @@ class ControladorEmpleado :
         fila = cursor.fetchone()
         resultado = Empleado ( id=fila[0], nombre=fila[1], apellido=fila[2], cedula=fila[3], fecha_ingreso=fila[4], salario=fila[5],cargo=fila[6]  )
         return resultado
+    
+    def ActualizarEmpleado(empleado: Empleado):
+        cursor = ControladorEmpleado.ObtenerCursor()
+        cursor.execute("""
+            UPDATE empleados 
+            SET nombre=%s, apellido=%s, cedula=%s, fecha_ingreso=%s, salario=%s, cargo=%s
+            WHERE id=%s
+        """, (empleado.nombre, empleado.apellido, empleado.cedula, empleado.fecha_ingreso, empleado.salario, empleado.cargo, empleado.id))
+        cursor.connection.commit()
+
 
     def ObtenerCursor():
         connection = psycopg2.connect(database=SecretConfig.PGDATABASE, user=SecretConfig.PGUSER, password=SecretConfig.PGPASSWORD, host=SecretConfig.PGHOST, port=SecretConfig.PGPORT)
