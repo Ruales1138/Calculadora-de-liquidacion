@@ -3,8 +3,8 @@ sys.path.append( "src" )
 
 import psycopg2
 
-from model2.empleados import Empleado
-import model2.SecretConfig as SecretConfig
+from src.model2.empleados import Empleado
+import SecretConfig as SecretConfig
 
 class ControladorEmpleado :
 
@@ -66,4 +66,5 @@ class ControladorEmpleado :
         connection = psycopg2.connect(database=SecretConfig.PGDATABASE, user=SecretConfig.PGUSER, password=SecretConfig.PGPASSWORD, host=SecretConfig.PGHOST, port=SecretConfig.PGPORT)
         # Todas las instrucciones se ejecutan a tavés de un cursor
         cursor = connection.cursor()
+        psycopg2.connect(database=SecretConfig.PGDATABASE)
         return cursor
