@@ -4,7 +4,7 @@ sys.path.append( "src" )
 import psycopg2
 
 from model2.conceptos_liquidaciones import Conceptos_liquidaciones
-import model2.SecretConfig as SecretConfig
+import SecretConfig as SecretConfig
 
 class ControladorConceptosLiquidaciones :
 

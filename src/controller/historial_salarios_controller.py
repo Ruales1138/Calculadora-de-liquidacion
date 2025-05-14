@@ -4,7 +4,7 @@ sys.path.append( "src" )
 import psycopg2
 
 from model2.historial_salarios import Historial_salarios
-import model2.SecretConfig as SecretConfig
+import SecretConfig as SecretConfig
 
 class ControladorHistorialSalarios :
 
