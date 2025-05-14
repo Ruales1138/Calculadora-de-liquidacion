@@ -1,4 +1,4 @@
-drop table empleados;
+drop table if exists empleados;
 CREATE TABLE empleados (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100),

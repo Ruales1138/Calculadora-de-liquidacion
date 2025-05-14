@@ -22,12 +22,11 @@ class ControladorEmpleado :
 ); """)
         cursor.connection.commit()
 
+    
     def EliminarTabla():
-        """ Borra la tabla de usuarios de la BD """
+        """ Borra la tabla empleados y sus dependencias """
         cursor = ControladorEmpleado.ObtenerCursor()
-
-        cursor.execute("""drop table empleados""" )
-
+        cursor.execute("""DROP TABLE IF EXISTS empleados CASCADE""")
         cursor.connection.commit()
 
 
