@@ -82,11 +82,11 @@ psql -U tu_usuario -d nombre_de_tu_bd -f SQL/crear-liquidaciones.sql
 6. ejecuta la aplicación
 python src/view/interfaz.py
 
-##Ejecutar las pruebas unitarias
+## Ejecutar las pruebas unitarias
 
 * python -m unittest discover -s tests
 
-##Tecnologías usadas
+## Tecnologías usadas
 
 * Python 3.8+
 * Kivy (interfaz gráfica)
