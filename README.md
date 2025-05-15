@@ -65,6 +65,7 @@ pip install kivy psycopg2
 
 3. Configura la base de datos
 edita el archivo SecretConfig-sample en la raiz del proyecto
+
  PGHOST='PONGA EL HOST DE LA BD AQUI'
 
  PGDATABASE='PONGA EL NOMBRE DE LA BD AQUI'
