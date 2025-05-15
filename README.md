@@ -56,7 +56,7 @@ CALCULADORA-DE-LIQUIDACION/
 
 ## Cómo ejecutar la aplicación
 
-1. Clona el repositorio
+### 1. Clona el repositorio
 git clone https://github.com/usuario/Calculadora-de-liquidacion.git
 cd Calculadora-de-liquidacion
 
