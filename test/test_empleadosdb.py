@@ -1,93 +1,99 @@
-import os
+import unittest
 import sys
+import os
+from datetime import datetime, timedelta
+
 sys.path.append("src")
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-import unittest
-from datetime import date
-from src.controller.empleados_controller import ControladorEmpleado
-from src.model2.empleados import Empleado
+from src.controller.liquidaciones_controller import ControladorLiquidaciones
+from src.model2.liquidacion import Liquidacion
 
-class TestControladorEmpleado(unittest.TestCase):
+class LiquidacionesTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        ControladorEmpleado.EliminarTabla()
-        ControladorEmpleado.CrearTabla()
+        ControladorLiquidaciones.EliminarTabla()
+        ControladorLiquidaciones.CrearTabla()
 
-    def setUp(self):
-        # Limpia la tabla antes de cada prueba
-        cursor = ControladorEmpleado.ObtenerCursor()
-        cursor.execute("DELETE FROM empleados")
+        cls.ids = []
+        base_date = datetime(2023, 1, 1)
+
+        # Crear y guardar 3 liquidaciones
+        for i in range(3):
+            liquidacion = Liquidacion(
+                id=None,
+                salario_base=1500000 + i * 100000,
+                aux_transporte=140606,
+                fecha_inicio=base_date,
+                fecha_fin=base_date + timedelta(days=365),
+                dias_trabajados=365,
+                anos_servicio=1.0,
+                dias_vacaciones_pend=5 + i,
+                dias_prima=180,
+                dias_cesantias=180,
+                indemnizacion=1500000 + i * 100000,
+                vacaciones=250000,
+                cesantias=400000,
+                intereses_cesantias=48000,
+                prima=400000,
+                aguinaldo=125000,
+                total_liquidacion=3725000 + i * 100000,
+                fecha_calculo=datetime.now()
+            )
+            inserted_id = ControladorLiquidaciones.InsertarLiquidacion(liquidacion)
+            cls.ids.append(inserted_id)
+
+    # -------------------- Pruebas de Inserción --------------------
+    def test_insertar_liquidacion_1(self):
+        self.assertIsInstance(self.ids[0], int)
+
+    def test_insertar_liquidacion_2(self):
+        self.assertIsInstance(self.ids[1], int)
+
+    def test_insertar_liquidacion_3(self):
+        self.assertIsInstance(self.ids[2], int)
+
+    # -------------------- Pruebas de Búsqueda --------------------
+    def test_buscar_liquidacion_1(self):
+        buscado = ControladorLiquidaciones.BuscarPorId(self.ids[0])
+        self.assertIsNotNone(buscado)
+        self.assertEqual(buscado.dias_vacaciones_pend, 5)
+
+    def test_buscar_liquidacion_2(self):
+        buscado = ControladorLiquidaciones.BuscarPorId(self.ids[1])
+        self.assertIsNotNone(buscado)
+        self.assertEqual(buscado.salario_base, 1600000)
+
+    def test_buscar_liquidacion_3(self):
+        buscado = ControladorLiquidaciones.BuscarPorId(self.ids[2])
+        self.assertIsNotNone(buscado)
+        self.assertEqual(buscado.total_liquidacion, 3925000)
+
+    # -------------------- Pruebas de Modificación --------------------
+    def test_modificar_liquidacion_1(self):
+        cursor = ControladorLiquidaciones.ObtenerCursor()
+        cursor.execute("UPDATE liquidaciones SET prima = %s WHERE id = %s", (999999, self.ids[0]))
         cursor.connection.commit()
+        buscado = ControladorLiquidaciones.BuscarPorId(self.ids[0])
+        self.assertEqual(buscado.prima, 999999)
 
-    # --------------- Pruebas de inserción ---------------
+    def test_modificar_liquidacion_2(self):
+        cursor = ControladorLiquidaciones.ObtenerCursor()
+        cursor.execute("UPDATE liquidaciones SET cesantias = %s WHERE id = %s", (888888, self.ids[1]))
+        cursor.connection.commit()
+        buscado = ControladorLiquidaciones.BuscarPorId(self.ids[1])
+        self.assertEqual(buscado.cesantias, 888888)
 
-    def test_insertar_empleado_1(self):
-        emp = Empleado(1, "Laura", "Gomez", "111", date(2022, 5, 1), 2500000, "Analista")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(1)
-        emp.esIgual(emp_db)
+    def test_modificar_liquidacion_3(self):
+        cursor = ControladorLiquidaciones.ObtenerCursor()
+        cursor.execute("UPDATE liquidaciones SET dias_vacaciones_pend = %s WHERE id = %s", (99, self.ids[2]))
+        cursor.connection.commit()
+        buscado = ControladorLiquidaciones.BuscarPorId(self.ids[2])
+        self.assertEqual(buscado.dias_vacaciones_pend, 99)
 
-    def test_insertar_empleado_2(self):
-        emp = Empleado(2, "Carlos", "Perez", "222", date(2023, 1, 15), 3200000, "Ingeniero")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(2)
-        emp.esIgual(emp_db)
-
-    def test_insertar_empleado_3(self):
-        emp = Empleado(3, "Sandra", "Lopez", "333", date(2021, 7, 30), 2800000, "Técnico")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(3)
-        emp.esIgual(emp_db)
-
-    # --------------- Pruebas de modificación ---------------
-
-    def test_modificar_empleado_1(self):
-        emp = Empleado(4, "Luis", "Mora", "444", date(2020, 3, 10), 3000000, "Jefe")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp.nombre = "Luis Alberto"
-        ControladorEmpleado.ActualizarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(4)
-        emp.esIgual(emp_db)
-
-    def test_modificar_empleado_2(self):
-        emp = Empleado(5, "Angela", "Rincon", "555", date(2019, 8, 1), 3100000, "Coordinadora")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp.salario = 3500000
-        ControladorEmpleado.ActualizarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(5)
-        emp.esIgual(emp_db)
-
-    def test_modificar_empleado_3(self):
-        emp = Empleado(6, "Diego", "Martinez", "666", date(2018, 12, 15), 2950000, "Auxiliar")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp.cargo = "Supervisor"
-        ControladorEmpleado.ActualizarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(6)
-        emp.esIgual(emp_db)
-
-    # --------------- Pruebas de búsqueda ---------------
-
-    def test_buscar_empleado_1(self):
-        emp = Empleado(7, "Cesar", "Nuñez", "777", date(2022, 10, 5), 2700000, "Contador")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(7)
-        emp.esIgual(emp_db)
-
-    def test_buscar_empleado_2(self):
-        emp = Empleado(8, "Patricia", "Salas", "888", date(2023, 3, 3), 2600000, "Consultora")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(8)
-        emp.esIgual(emp_db)
-
-    def test_buscar_empleado_3(self):
-        emp = Empleado(9, "Jorge", "Rivera", "999", date(2020, 9, 9), 3100000, "Diseñador")
-        ControladorEmpleado.InsertarEmpleado(emp)
-        emp_db = ControladorEmpleado.BuscarEmpleadoId(9)
-        emp.esIgual(emp_db)
 
 if __name__ == '__main__':
     unittest.main()
