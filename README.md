@@ -29,12 +29,15 @@ este programa contiene varias carpetas entre estas las mas esenciales para el co
 
 Este proyecto es una aplicación de escritorio con interfaz gráfica, diseñada para calcular la liquidación laboral de un trabajador colombiano a partir de los parámetros de su contrato. Está estructurado bajo una arquitectura modular basada en MVC (Modelo–Vista–Controlador), con integración directa a una base de datos PostgreSQL para almacenamiento persistente de cada cálculo realizado.
 
-### Entradas: para realizar una calculadora de liquidacion definitiva necesitamos principalmente 2 valores de entrada brindadas por el usuario: SALARIO Y DIAS TRABAJADOS
+### Entradas: 
+ para realizar una calculadora de liquidacion definitiva necesitamos principalmente 2 valores de entrada brindadas por el usuario: SALARIO Y DIAS TRABAJADOS
 
-### Proceso: continuamos con el calculo de las variables que darian el total de la liquidacion, las cuales son LA PRIMA, LAS CESANTIAS, LAS VACACIONES, LOS INTERESES DE LAS CESANTIAS (La indemnizacion si aplica) todo esto 
+### Proceso: 
+ continuamos con el calculo de las variables que darian el total de la liquidacion, las cuales son LA PRIMA, LAS CESANTIAS, LAS VACACIONES, LOS INTERESES DE LAS CESANTIAS (La indemnizacion si aplica) todo esto 
 para llegar a unos resultados que se sumaran al final del proceso.
 
-### Salida: la unica variable de salida es el TOTAL DE LA LIQUIDACION, la cual seria el valor total que la empresa tendria que pagarle al usuario por sus servicios dentro de la empresa.
+### Salida: 
+ la unica variable de salida es el TOTAL DE LA LIQUIDACION, la cual seria el valor total que la empresa tendria que pagarle al usuario por sus servicios dentro de la empresa.
 
 ## 📂 Estructura del Proyecto
 
