@@ -27,12 +27,12 @@ Se necesita tener el codigo abierto y posteriormente poner ejecutar la consola, 
 ## ¿Como esta hecho?
 este programa contiene varias carpetas entre estas las mas esenciales para el codigo, las cuales son "model" que contiene la logica del programa, "tests" que contiene todos los casos de prueba, y finalmente "ui" que contiene la consola y es donde se debe correr para ejecutar el programa.
 
-###Entradas: para realizar una calculadora de liquidacion definitiva necesitamos principalmente 2 valores de entrada brindadas por el usuario: SALARIO Y DIAS TRABAJADOS
+Entradas: para realizar una calculadora de liquidacion definitiva necesitamos principalmente 2 valores de entrada brindadas por el usuario: SALARIO Y DIAS TRABAJADOS
 
-###Proceso: continuamos con el calculo de las variables que darian el total de la liquidacion, las cuales son LA PRIMA, LAS CESANTIAS, LAS VACACIONES, LOS INTERESES DE LAS CESANTIAS (La indemnizacion si aplica) todo esto 
+Proceso: continuamos con el calculo de las variables que darian el total de la liquidacion, las cuales son LA PRIMA, LAS CESANTIAS, LAS VACACIONES, LOS INTERESES DE LAS CESANTIAS (La indemnizacion si aplica) todo esto 
 para llegar a unos resultados que se sumaran al final del proceso.
 
-###Salida: la unica variable de salida es el TOTAL DE LA LIQUIDACION, la cual seria el valor total que la empresa tendria que pagarle al usuario por sus servicios dentro de la empresa.
+Salida: la unica variable de salida es el TOTAL DE LA LIQUIDACION, la cual seria el valor total que la empresa tendria que pagarle al usuario por sus servicios dentro de la empresa.
 
 ## 📂 Estructura del Proyecto
 
@@ -56,14 +56,14 @@ CALCULADORA-DE-LIQUIDACION/
 
 ## Cómo ejecutar la aplicación
 
-###1. Clona el repositorio
+1. Clona el repositorio
 git clone https://github.com/usuario/Calculadora-de-liquidacion.git
 cd Calculadora-de-liquidacion
 
-###2. Instala las dependencias
+2. Instala las dependencias
 pip install kivy psycopg2
 
-###3. Configura la base de datos
+3. Configura la base de datos
 edita el archivo SecretConfig-sample en la raiz del proyecto
 PGHOST='PONGA EL HOST DE LA BD AQUI'
 PGDATABASE='PONGA EL NOMBRE DE LA BD AQUI'
@@ -71,10 +71,10 @@ PGUSER='PONGA EL USUARIO AQUI'
 PGPASSWORD='PONGA LA CONTRASEÑA AQUI'
 PGPORT="5432"
 
-###4. crea la tabla
+4. crea la tabla
 psql -U tu_usuario -d nombre_de_tu_bd -f SQL/crear-liquidaciones.sql
 
-###5. ejecuta la aplicación
+5. ejecuta la aplicación
 python src/view/interfaz.py
 
 ##🧪 Ejecutar las pruebas unitarias
