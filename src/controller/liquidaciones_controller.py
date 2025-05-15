@@ -3,6 +3,8 @@ sys.path.append("src")
 
 import psycopg2
 from model2.liquidacion import Liquidacion
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 import SecretConfig
 
 

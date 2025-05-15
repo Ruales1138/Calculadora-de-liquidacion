@@ -15,6 +15,9 @@ import sys
 sys.path.append("src")
 from model.PaymentLogic import PaymentLogic_Calculator
 
+from controller.liquidaciones_controller import ControladorLiquidaciones
+from model2.liquidacion import Liquidacion
+
 resource_add_path('fonts')
 
 
@@ -156,6 +159,28 @@ class PaymentLogic(App):
         self.screen_manager.add_widget(self.resultados_screen)
 
         return self.screen_manager
+    
+    def crear_instancia_liquidacion(self, calculadora):
+       return Liquidacion(
+        id=None,
+        salario_base=calculadora.salario_base,
+        aux_transporte=calculadora.aux_transporte,
+        fecha_inicio=calculadora.fecha_inicio,
+        fecha_fin=calculadora.fecha_fin,
+        dias_trabajados=calculadora.dias_trabajados,
+        anos_servicio=round(calculadora.calcular_anos_servicio(), 2),
+        dias_vacaciones_pend=calculadora.dias_vacaciones_pend,
+        dias_prima=calculadora.dias_prima,
+        dias_cesantias=calculadora.dias_cesantias,
+        indemnizacion=round(calculadora.calcular_indemnizacion(), 2),
+        vacaciones=round(calculadora.calcular_vacaciones(), 2),
+        cesantias=round(calculadora.calcular_cesantias(), 2),
+        intereses_cesantias=round(calculadora.calcular_intereses_cesantias(), 2),
+        prima=round(calculadora.calcular_prima(), 2),
+        aguinaldo=round(calculadora.calcular_aguinaldo(), 2),
+        total_liquidacion=round(calculadora.calcular_total_liquidacion(), 2),
+        fecha_calculo=datetime.now()
+       )
 
 
 
@@ -222,6 +247,10 @@ class PaymentLogic(App):
                 dias_prima=dias_prima,
                 dias_cesantias=dias_cesantias
             )
+
+            # Convertir el resultado a una instancia de Liquidacion e insertar en la base de datos
+            liquidacion = self.crear_instancia_liquidacion(calculadora)
+            ControladorLiquidaciones.InsertarLiquidacion(liquidacion)
 
 
             resultado_text = (
