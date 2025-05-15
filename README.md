@@ -27,6 +27,8 @@ Se necesita tener el codigo abierto y posteriormente poner ejecutar la consola, 
 ## ¿Como esta hecho?
 este programa contiene varias carpetas entre estas las mas esenciales para el codigo, las cuales son "model" que contiene la logica del programa, "tests" que contiene todos los casos de prueba, y finalmente "ui" que contiene la consola y es donde se debe correr para ejecutar el programa.
 
+Este proyecto es una aplicación de escritorio con interfaz gráfica, diseñada para calcular la liquidación laboral de un trabajador colombiano a partir de los parámetros de su contrato. Está estructurado bajo una arquitectura modular basada en MVC (Modelo–Vista–Controlador), con integración directa a una base de datos PostgreSQL para almacenamiento persistente de cada cálculo realizado.
+
 Entradas: para realizar una calculadora de liquidacion definitiva necesitamos principalmente 2 valores de entrada brindadas por el usuario: SALARIO Y DIAS TRABAJADOS
 
 Proceso: continuamos con el calculo de las variables que darian el total de la liquidacion, las cuales son LA PRIMA, LAS CESANTIAS, LAS VACACIONES, LOS INTERESES DE LAS CESANTIAS (La indemnizacion si aplica) todo esto 
