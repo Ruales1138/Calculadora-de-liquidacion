@@ -36,23 +36,23 @@ Salida: la unica variable de salida es el TOTAL DE LA LIQUIDACION, la cual seria
 
 ## 📂 Estructura del Proyecto
 
-CALCULADORA-DE-LIQUIDACION/
-├── SQL/
-│ └── crear-liquidaciones.sql
-├── src/
-│ ├── controller/
-│ │ └── liquidacion_controller.py
-│ ├── model/
-│ │ └── PaymentLogic.py
-│ ├── model2/
-│ │ └── liquidacion.py
-│ └── view/
-│ └── interfaz.py
-├── tests/
-│ └── test_liquidacion.py
-├── SecretConfig.py
-├── README.md
-├── .gitignore
+* CALCULADORA-DE-LIQUIDACION/
+* ├── SQL/
+* │ └── crear-liquidaciones.sql
+* ├── src/
+* │ ├── controller/
+* │ │ └── liquidacion_controller.py
+* │ ├── model/
+* │ │ └── PaymentLogic.py
+* │ ├── model2/
+* │ │ └── liquidacion.py
+* │ └── view/
+* │ └── interfaz.py
+* ├── tests/
+* │ └── test_liquidacion.py
+* ├── SecretConfig.py
+* ├── README.md
+* ├── .gitignore
 
 ## Cómo ejecutar la aplicación
 
