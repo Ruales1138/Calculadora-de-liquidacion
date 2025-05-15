@@ -65,16 +65,20 @@ pip install kivy psycopg2
 
 3. Configura la base de datos
 edita el archivo SecretConfig-sample en la raiz del proyecto
-PGHOST='PONGA EL HOST DE LA BD AQUI'
-PGDATABASE='PONGA EL NOMBRE DE LA BD AQUI'
-PGUSER='PONGA EL USUARIO AQUI'
-PGPASSWORD='PONGA LA CONTRASEÑA AQUI'
-PGPORT="5432"
+ PGHOST='PONGA EL HOST DE LA BD AQUI'
 
-4. crea la tabla
+ PGDATABASE='PONGA EL NOMBRE DE LA BD AQUI'
+ 
+ PGUSER='PONGA EL USUARIO AQUI'
+ 
+ PGPASSWORD='PONGA LA CONTRASEÑA AQUI'
+ 
+ PGPORT="5432"
+
+5. crea la tabla
 psql -U tu_usuario -d nombre_de_tu_bd -f SQL/crear-liquidaciones.sql
 
-5. ejecuta la aplicación
+6. ejecuta la aplicación
 python src/view/interfaz.py
 
 ##🧪 Ejecutar las pruebas unitarias
