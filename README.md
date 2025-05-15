@@ -84,7 +84,7 @@ python src/view/interfaz.py
 
 ##Ejecutar las pruebas unitarias
 
-python -m unittest discover -s tests
+* python -m unittest discover -s tests
 
 ##Tecnologías usadas
 
