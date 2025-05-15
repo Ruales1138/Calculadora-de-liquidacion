@@ -2,8 +2,9 @@ import sys
 sys.path.append("src")
 
 import psycopg2
-from model2.liquidaciones import Liquidacion
+from model2.liquidacion import Liquidacion
 import SecretConfig
+
 
 class ControladorLiquidaciones:
 
@@ -14,13 +15,22 @@ class ControladorLiquidaciones:
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS liquidaciones (
                 id SERIAL PRIMARY KEY,
-                nombre_empleado VARCHAR(100) NOT NULL,
-                cedula_empleado VARCHAR(20) NOT NULL,
-                fecha_ingreso DATE NOT NULL,
-                fecha_salida DATE NOT NULL,
-                salario_base NUMERIC(15, 2) NOT NULL,
-                dias_laborados INTEGER NOT NULL,
-                total_liquidacion NUMERIC(15, 2) NOT NULL,
+                salario_base NUMERIC(12, 2) NOT NULL,
+                aux_transporte NUMERIC(12, 2) NOT NULL,
+                fecha_inicio DATE NOT NULL,
+                fecha_fin DATE NOT NULL,
+                dias_trabajados INTEGER NOT NULL,
+                anos_servicio NUMERIC(5, 2) NOT NULL,
+                dias_vacaciones_pend INTEGER NOT NULL,
+                dias_prima INTEGER NOT NULL,
+                dias_cesantias INTEGER NOT NULL,
+                indemnizacion NUMERIC(12, 2) NOT NULL,
+                vacaciones NUMERIC(12, 2) NOT NULL,
+                cesantias NUMERIC(12, 2) NOT NULL,
+                intereses_cesantias NUMERIC(12, 2) NOT NULL,
+                prima NUMERIC(12, 2) NOT NULL,
+                aguinaldo NUMERIC(12, 2) NOT NULL,
+                total_liquidacion NUMERIC(14, 2) NOT NULL,
                 fecha_calculo TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """)
@@ -28,34 +38,40 @@ class ControladorLiquidaciones:
 
     @staticmethod
     def EliminarTabla():
-        """ Elimina la tabla de liquidaciones de la base de datos """
+        """ Elimina la tabla de liquidaciones """
         cursor = ControladorLiquidaciones.ObtenerCursor()
-        cursor.execute("DROP TABLE IF EXISTS liquidaciones")
+        cursor.execute("DROP TABLE IF EXISTS liquidaciones;")
         cursor.connection.commit()
 
     @staticmethod
     def InsertarLiquidacion(liquidacion: Liquidacion):
-        """ Inserta una liquidación en la tabla """
+        """ Inserta una liquidación en la base de datos """
         cursor = ControladorLiquidaciones.ObtenerCursor()
         cursor.execute("""
             INSERT INTO liquidaciones (
-                nombre_empleado,
-                cedula_empleado,
-                fecha_ingreso,
-                fecha_salida,
-                salario_base,
-                dias_laborados,
-                total_liquidacion,
-                fecha_calculo
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                salario_base, aux_transporte, fecha_inicio, fecha_fin,
+                dias_trabajados, anos_servicio, dias_vacaciones_pend,
+                dias_prima, dias_cesantias, indemnizacion, vacaciones,
+                cesantias, intereses_cesantias, prima, aguinaldo,
+                total_liquidacion, fecha_calculo
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
         """, (
-            liquidacion.nombre_empleado,
-            liquidacion.cedula_empleado,
-            liquidacion.fecha_ingreso,
-            liquidacion.fecha_salida,
             liquidacion.salario_base,
-            liquidacion.dias_laborados,
+            liquidacion.aux_transporte,
+            liquidacion.fecha_inicio,
+            liquidacion.fecha_fin,
+            liquidacion.dias_trabajados,
+            liquidacion.anos_servicio,
+            liquidacion.dias_vacaciones_pend,
+            liquidacion.dias_prima,
+            liquidacion.dias_cesantias,
+            liquidacion.indemnizacion,
+            liquidacion.vacaciones,
+            liquidacion.cesantias,
+            liquidacion.intereses_cesantias,
+            liquidacion.prima,
+            liquidacion.aguinaldo,
             liquidacion.total_liquidacion,
             liquidacion.fecha_calculo
         ))
@@ -65,11 +81,13 @@ class ControladorLiquidaciones:
 
     @staticmethod
     def BuscarPorId(id):
-        """ Busca una liquidación por su ID y retorna un objeto Liquidacion """
+        """ Busca una liquidación por ID y retorna un objeto Liquidacion """
         cursor = ControladorLiquidaciones.ObtenerCursor()
         cursor.execute("""
-            SELECT id, nombre_empleado, cedula_empleado, fecha_ingreso,
-                   fecha_salida, salario_base, dias_laborados,
+            SELECT id, salario_base, aux_transporte, fecha_inicio, fecha_fin,
+                   dias_trabajados, anos_servicio, dias_vacaciones_pend,
+                   dias_prima, dias_cesantias, indemnizacion, vacaciones,
+                   cesantias, intereses_cesantias, prima, aguinaldo,
                    total_liquidacion, fecha_calculo
             FROM liquidaciones
             WHERE id = %s
@@ -78,20 +96,29 @@ class ControladorLiquidaciones:
         if fila:
             return Liquidacion(
                 id=fila[0],
-                nombre_empleado=fila[1],
-                cedula_empleado=fila[2],
-                fecha_ingreso=fila[3],
-                fecha_salida=fila[4],
-                salario_base=fila[5],
-                dias_laborados=fila[6],
-                total_liquidacion=fila[7],
-                fecha_calculo=fila[8]
+                salario_base=fila[1],
+                aux_transporte=fila[2],
+                fecha_inicio=fila[3],
+                fecha_fin=fila[4],
+                dias_trabajados=fila[5],
+                anos_servicio=fila[6],
+                dias_vacaciones_pend=fila[7],
+                dias_prima=fila[8],
+                dias_cesantias=fila[9],
+                indemnizacion=fila[10],
+                vacaciones=fila[11],
+                cesantias=fila[12],
+                intereses_cesantias=fila[13],
+                prima=fila[14],
+                aguinaldo=fila[15],
+                total_liquidacion=fila[16],
+                fecha_calculo=fila[17]
             )
         return None
 
     @staticmethod
     def ObtenerCursor():
-        """ Crea la conexión a la base de datos y retorna un cursor """
+        """ Retorna un cursor activo conectado a la base de datos PostgreSQL """
         connection = psycopg2.connect(
             database=SecretConfig.PGDATABASE,
             user=SecretConfig.PGUSER,
