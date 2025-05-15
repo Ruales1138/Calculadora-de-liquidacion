@@ -3,6 +3,10 @@
 ## ¿Quien hizo esto?
 Valentina Mesa y Alejandra Escobar.
 
+## Entrega 5
+Heiver David Ruales Luna
+Sara Rojas Martínez
+
 ## ¿Que es y para que es?
 Una calculadora de liquidación definitiva es una herramienta utilizada para calcular el monto final que una persona o empresa debe recibir o pagar al finalizar una relación laboral o un contrato. Se usa para determinar indemnizaciones, prestaciones sociales, vacaciones no gozadas, entre otros conceptos, garantizando que el cálculo se haga de acuerdo con las leyes laborales vigentes.
 
