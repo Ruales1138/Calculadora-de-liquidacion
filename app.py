@@ -17,19 +17,16 @@ app = Flask(__name__)
 @app.route('/')      
 def index():
     return render_template("index.html")
-  
-@app.route('/hola')  
-def hello_html():
-    return render_template( 'hola.html', nombre=request.args["nombre"] )
 
 @app.route('/buscar')
 def buscar():
     return render_template('buscar.html')
 
-# @app.route('/lista_tarjetas')
-# def lista_tarjetas():
-#     tarjetas = TarjetasController.BuscarPorCedula( request.args["cedula"]  )
-#     return render_template('lista_tarjetas.html', cedula=request.args["cedula"], tarjetas=tarjetas  )
+@app.route('/lista')
+def lista_tarjetas():
+    #tarjetas = TarjetasController.BuscarPorCedula( request.args["cedula"]  )
+    tarjetas = 'gfasgf'
+    return render_template('lista.html', id=request.args["id"], tarjetas=tarjetas  )
 
 # Esta linea permite que nuestra aplicación se ejecute individualmente
 if __name__=='__main__':
