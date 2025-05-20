@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <p>
+        Búsqueda de Tarjetas para la cédula : {{ cedula }}
+    </p>
+
+    <!-- La etiqueta table se usa para crear tablas en HTML -->
+    <table>
+        <h1>Resultados de la Búsqueda</h1>
+        <!-- El elemento thead describe el area de encabezado en  la tabla -->
+        <thead style="font-weight: bold;">
+            <tr>
+                <td>Número</td>
+                <td>Franquicia</td>
+                <td>Cupo</td>
+            </tr>
+        </thead>
+
+        <!-- El elemento tbody describe el cuerpo de la tabla -->
+        <tbody>
+            {% for t in tarjetas %}
+            <tr>
+                <td>{{t.numero_tarjeta}}</td>
+                <td>{{t.franquicia}}</td>
+                <td>{{t.cupo}}</td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+    
+    
+    
+</body>
+
+</html>
