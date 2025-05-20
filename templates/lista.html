@@ -16,14 +16,19 @@
         <!-- El elemento thead describe el area de encabezado en  la tabla -->
         <thead style="font-weight: bold;">
             <tr>
-                <td>Número</td>
-                <td>Franquicia</td>
-                <td>Cupo</td>
+                <td>Salario Base</td>
+                <td>Liquidacion</td>
             </tr>
         </thead>
+        <tbody>
+            <tr>
+                <td>{{buscado.salario_base}}</td>
+                <td>{{buscado.total_liquidacion}}</td>
+            </tr>
+        </tbody>
 
         <!-- El elemento tbody describe el cuerpo de la tabla -->
-        <tbody>
+        <!-- <tbody>
             {% for t in tarjetas %}
             <tr>
                 <td>{{t.numero_tarjeta}}</td>
@@ -33,7 +38,7 @@
             {% endfor %}
 
 
-        </tbody>
+        </tbody> -->
 
     </table>
 

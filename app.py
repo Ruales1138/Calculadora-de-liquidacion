@@ -6,6 +6,7 @@ from flask import render_template, request
 
 import sys
 sys.path.append( "src" )
+from controller.liquidaciones_controller import ControladorLiquidaciones
 
 #from controller.tarjetas_controller import TarjetasController
 
@@ -25,9 +26,14 @@ def buscar():
 @app.route('/lista')
 def lista_tarjetas():
     #tarjetas = TarjetasController.BuscarPorCedula( request.args["cedula"]  )
-    tarjetas = 'gfasgf'
-    return render_template('lista.html', id=request.args["id"], tarjetas=tarjetas  )
+    #tarjetas = 'gfasgf'
+    buscado = ControladorLiquidaciones.BuscarPorId(request.args["id"])
+    return render_template('lista.html', id=request.args["id"], buscado=buscado  )
 
 # Esta linea permite que nuestra aplicación se ejecute individualmente
 if __name__=='__main__':
    app.run( debug=True)
+
+
+# buscado = ControladorLiquidaciones.BuscarPorId(1)
+# print(buscado.aguinaldo)
