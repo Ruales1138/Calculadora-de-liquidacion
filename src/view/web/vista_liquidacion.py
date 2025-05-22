@@ -11,6 +11,10 @@ from controller.liquidaciones_controller import ControladorLiquidaciones
 def Home():
    return render_template("index.html")
 
+@blueprint.errorhandler(Exception)
+def controlar_errores(err):
+    return f'Ocurrio un error en los datos ingresados: {err}'
+
 @blueprint.route('/buscar')
 def buscar():
     return render_template('buscar.html')
