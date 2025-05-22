@@ -1,39 +1,23 @@
-# Para las aplicaciones web creadas con Flask, debemos importar siempre el modulo 
-from flask import Flask    
+# Para las aplicaciones web creadas con Flask, debemos importar siempre el modulo flask
+# la clase request permite acceso a la información de la petición HTTP
+from flask import Flask, request, jsonify , url_for   
 
 # Para poder servir plantillas HTML desde archivos, es necesario importar el modulo render_template
-from flask import render_template, request
+from flask import render_template
 
 import sys
-sys.path.append( "src" )
-from controller.liquidaciones_controller import ControladorLiquidaciones
+sys.path.append("src")
 
-#from controller.tarjetas_controller import TarjetasController
+# IMportamos el modulo donde esta creado nuestro Blueprint
+from view.web import vista_liquidacion 
 
 # Flask constructor: crea una variable que nos servirá para comunicarle a Flask
 # la configuración que queremos para nuestra aplicación
 app = Flask(__name__)     
 
-# decorator: se usa para indicar el URL Path por el que se va a invocar nuestra función
-@app.route('/')      
-def index():
-    return render_template("index.html")
-
-@app.route('/buscar')
-def buscar():
-    return render_template('buscar.html')
-
-@app.route('/lista')
-def lista_tarjetas():
-    #tarjetas = TarjetasController.BuscarPorCedula( request.args["cedula"]  )
-    #tarjetas = 'gfasgf'
-    buscado = ControladorLiquidaciones.BuscarPorId(request.args["id"])
-    return render_template('lista.html', id=request.args["id"], buscado=buscado  )
+# Registramos los Blueprints que creamos 
+app.register_blueprint( vista_liquidacion.blueprint )
 
 # Esta linea permite que nuestra aplicación se ejecute individualmente
 if __name__=='__main__':
-   app.run( debug=True)
-
-
-# buscado = ControladorLiquidaciones.BuscarPorId(1)
-# print(buscado.aguinaldo)
+   app.run( debug=True )
