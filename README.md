@@ -148,7 +148,6 @@ pip install -r requirements.txt
 En Start Command ingresa:
 ```
 flask run -p 10000 -h 0.0.0.0
-
 ```
 Y cuando te pida url del proyecto ingresa el link de este proyecto de Github.
 
