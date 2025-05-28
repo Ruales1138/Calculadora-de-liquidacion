@@ -16,29 +16,30 @@
         <!-- El elemento thead describe el area de encabezado en  la tabla -->
         <thead style="font-weight: bold;">
             <tr>
-                <td>Salario Base</td>
-                <td>Liquidacion</td>
+                <td>Días trabajados</td>
+                <td>Años de servicio</td>
+                <td>Indemnización</td>
+                <td>Vacaciones</td>
+                <td>Cesantías</td>
+                <td>Intereses cesantías</td>
+                <td>Prima</td>
+                <td>Aguinaldo</td>
+                <td>Total liquidación</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{buscado.salario_base}}</td>
+                <td>{{buscado.dias_trabajados}}</td>
+                <td>{{buscado.anos_servicio}}</td>
+                <td>{{buscado.indemnizacion}}</td>
+                <td>{{buscado.vacaciones}}</td>
+                <td>{{buscado.cesantias}}</td>
+                <td>{{buscado.intereses_cesantias}}</td>
+                <td>{{buscado.prima}}</td>
+                <td>{{buscado.aguinaldo}}</td>
                 <td>{{buscado.total_liquidacion}}</td>
             </tr>
         </tbody>
-
-        <!-- El elemento tbody describe el cuerpo de la tabla -->
-        <!-- <tbody>
-            {% for t in tarjetas %}
-            <tr>
-                <td>{{t.numero_tarjeta}}</td>
-                <td>{{t.franquicia}}</td>
-                <td>{{t.cupo}}</td>
-            </tr>
-            {% endfor %}
-
-
-        </tbody> -->
 
     </table>
 

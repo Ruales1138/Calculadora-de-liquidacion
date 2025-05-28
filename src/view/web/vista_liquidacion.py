@@ -65,3 +65,9 @@ def confirmacion():
             )
     ControladorLiquidaciones.InsertarLiquidacion(liquidacion_2)
     return render_template('confirmacion.html', liquidacion=liquidacion.resumen_liquidacion())
+
+@blueprint.route('/crear')
+def crear():
+    ControladorLiquidaciones.EliminarTabla()
+    ControladorLiquidaciones.CrearTabla()
+    return render_template('crear.html')
