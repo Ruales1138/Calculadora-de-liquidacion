@@ -2,25 +2,104 @@
 <html>
 
 <head>
+  <meta charset="UTF-8" />
+  <title>Buscar historial de liquidación</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #eef2f7;
+      color: #333;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
+    a {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+
+    form {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #555;
+    }
+
+    div {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1.5px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      font-weight: 600;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-    <a href="/" >Inicio</a>
-    <form action="/lista">
-
-        <h1>Buscar historial de liquidacion</h1>
-
-        <p>Ingrese el número de id para obtener historial</p>
-
-        <div>
-            Id: <input type="text" name="id" />
-            
-            </select>
-        </div>
-        </div>
-        <input type="submit" value="Buscar" />
-    </form>
+  <a href="/">← Inicio</a>
+  <form action="/lista">
+    <h1>Buscar historial de liquidación</h1>
+    <p>Ingrese el número de id para obtener historial</p>
+    <div>
+      Id: <input type="text" name="id" required />
+    </div>
+    <input type="submit" value="Buscar" />
+  </form>
 </body>
 
 </html>

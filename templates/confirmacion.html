@@ -1,45 +1,97 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <title>Información Agregada</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
+    a {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: 600;
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #007bff;
+      color: white;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    td {
+      font-size: 15px;
+    }
+  </style>
 </head>
-
 <body>
-    <a href="/" >Inicio</a>
-    <table>
-        <h1>Informacion agregada correctamente</h1>
-        <!-- El elemento thead describe el area de encabezado en  la tabla -->
-        <thead style="font-weight: bold;">
-            <tr>
-                <td>Días trabajados</td>
-                <td>Años de servicio</td>
-                <td>Indemnización</td>
-                <td>Vacaciones</td>
-                <td>Cesantías</td>
-                <td>Intereses cesantías</td>
-                <td>Prima</td>
-                <td>Aguinaldo</td>
-                <td>Total liquidación</td>
-            </tr>
-        </thead>
-
-        <!-- El elemento tbody describe el cuerpo de la tabla -->
-        <tbody>
-            <tr>
-                <td>{{liquidacion['Días trabajados']}}</td>
-                <td>{{liquidacion['Años de servicio']}}</td>
-                <td>{{liquidacion['Indemnización']}}</td>
-                <td>{{liquidacion['Vacaciones']}}</td>
-                <td>{{liquidacion['Cesantías']}}</td>
-                <td>{{liquidacion['Intereses cesantías']}}</td>
-                <td>{{liquidacion['Prima']}}</td>
-                <td>{{liquidacion['Aguinaldo']}}</td>
-                <td>{{liquidacion['Total liquidación']}}</td>
-            </tr>
-        </tbody>
-        
-    </table>
+  <a href="/">← Inicio</a>
+  <h1>Información agregada correctamente</h1>
+  <table>
+    <thead>
+      <tr>
+        <td>Días trabajados</td>
+        <td>Años de servicio</td>
+        <td>Indemnización</td>
+        <td>Vacaciones</td>
+        <td>Cesantías</td>
+        <td>Intereses cesantías</td>
+        <td>Prima</td>
+        <td>Aguinaldo</td>
+        <td>Total liquidación</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{liquidacion['Días trabajados']}}</td>
+        <td>{{liquidacion['Años de servicio']}}</td>
+        <td>{{liquidacion['Indemnización']}}</td>
+        <td>{{liquidacion['Vacaciones']}}</td>
+        <td>{{liquidacion['Cesantías']}}</td>
+        <td>{{liquidacion['Intereses cesantías']}}</td>
+        <td>{{liquidacion['Prima']}}</td>
+        <td>{{liquidacion['Aguinaldo']}}</td>
+        <td>{{liquidacion['Total liquidación']}}</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
-
 </html>

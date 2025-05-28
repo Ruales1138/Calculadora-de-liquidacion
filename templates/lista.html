@@ -2,55 +2,132 @@
 <html>
 
 <head>
+  <meta charset="UTF-8" />
+  <title>Resultados de la Búsqueda</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fa;
+      color: #333;
+      margin: 20px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
+    a {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #007bff;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    thead td {
+      padding: 12px 15px;
+    }
+
+    tbody td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f8ff;
+    }
+
+    div {
+      margin-top: 25px;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    div a {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    div a:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-    <a href="/" >Inicio</a>
-    <p>
-        Búsqueda de el id: {{ id }}
-    </p>
+  <a href="/">← Inicio</a>
 
-    <!-- La etiqueta table se usa para crear tablas en HTML -->
-    <table>
-        <h1>Resultados de la Búsqueda</h1>
-        <!-- El elemento thead describe el area de encabezado en  la tabla -->
-        <thead style="font-weight: bold;">
-            <tr>
-                <td>Días trabajados</td>
-                <td>Años de servicio</td>
-                <td>Indemnización</td>
-                <td>Vacaciones</td>
-                <td>Cesantías</td>
-                <td>Intereses cesantías</td>
-                <td>Prima</td>
-                <td>Aguinaldo</td>
-                <td>Total liquidación</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{buscado.dias_trabajados}}</td>
-                <td>{{buscado.anos_servicio}}</td>
-                <td>{{buscado.indemnizacion}}</td>
-                <td>{{buscado.vacaciones}}</td>
-                <td>{{buscado.cesantias}}</td>
-                <td>{{buscado.intereses_cesantias}}</td>
-                <td>{{buscado.prima}}</td>
-                <td>{{buscado.aguinaldo}}</td>
-                <td>{{buscado.total_liquidacion}}</td>
-            </tr>
-        </tbody>
+  <h1>Resultados de la Búsqueda</h1>
 
-    </table>
+  <p>Búsqueda del id: {{ id }}</p>
 
-    
-    <div><a href="/modificar?id={{buscado.id}}">Modificar</a></div>
+  <table>
+    <thead>
+      <tr>
+        <td>Días trabajados</td>
+        <td>Años de servicio</td>
+        <td>Indemnización</td>
+        <td>Vacaciones</td>
+        <td>Cesantías</td>
+        <td>Intereses cesantías</td>
+        <td>Prima</td>
+        <td>Aguinaldo</td>
+        <td>Total liquidación</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{buscado.dias_trabajados}}</td>
+        <td>{{buscado.anos_servicio}}</td>
+        <td>{{buscado.indemnizacion}}</td>
+        <td>{{buscado.vacaciones}}</td>
+        <td>{{buscado.cesantias}}</td>
+        <td>{{buscado.intereses_cesantias}}</td>
+        <td>{{buscado.prima}}</td>
+        <td>{{buscado.aguinaldo}}</td>
+        <td>{{buscado.total_liquidacion}}</td>
+      </tr>
+    </tbody>
+  </table>
 
+  <div><a href="/modificar?id={{buscado.id}}">Modificar</a></div>
 
-    
-    
-    
 </body>
 
 </html>
