@@ -139,7 +139,7 @@ python3 -m flask run --debug
 
 **¿Cómo ejecutarlo desde Render.com?**
 
-Primero, tienes que ingresar a Render.com y crear una cuenta, luego crea un proyecto nuevo e ingresa los siguientes parámetros donde te los pida en la configuración del proyecto:
+Primero, tienes que ingresar a Render.com y crea una cuenta, luego haz click en el botón páginas web y ahi puedes crear un proyecto nuevo, luego ingresa los siguientes parámetros donde te los pida en la configuración del proyecto:
 
 En el build command, ingresa:
 ```
