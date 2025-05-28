@@ -71,3 +71,39 @@ def crear():
     ControladorLiquidaciones.EliminarTabla()
     ControladorLiquidaciones.CrearTabla()
     return render_template('crear.html')
+
+@blueprint.route('/modificar')
+def modificar():
+    id = request.args.get('id')
+    buscado = ControladorLiquidaciones.BuscarPorId(id)
+    return render_template('modificar.html', buscado=buscado)
+
+@blueprint.route('/confirmar_modificacion')
+def confirmar_modificacion():
+    from model2.liquidacion import Liquidacion
+    from datetime import datetime
+
+    liquidacion = Liquidacion(
+        id=int(request.args['id']),
+        salario_base=float(request.args['salario_base']),
+        aux_transporte=float(request.args['aux_transporte']),
+        fecha_inicio=datetime.strptime(request.args['fecha_inicio'], "%Y-%m-%d"),
+        fecha_fin=datetime.strptime(request.args['fecha_fin'], "%Y-%m-%d"),
+        dias_trabajados=(datetime.strptime(request.args['fecha_fin'], "%Y-%m-%d") - datetime.strptime(request.args['fecha_inicio'], "%Y-%m-%d")).days,
+        anos_servicio=round((datetime.strptime(request.args['fecha_fin'], "%Y-%m-%d") - datetime.strptime(request.args['fecha_inicio'], "%Y-%m-%d")).days / 365, 2),
+        dias_vacaciones_pend=int(request.args['dias_vacaciones_pend']),
+        dias_prima=int(request.args['dias_prima']),
+        dias_cesantias=int(request.args['dias_cesantias']),
+        indemnizacion=float(request.args['indemnizacion']),
+        vacaciones=float(request.args['vacaciones']),
+        cesantias=float(request.args['cesantias']),
+        intereses_cesantias=float(request.args['intereses_cesantias']),
+        prima=float(request.args['prima']),
+        aguinaldo=float(request.args['aguinaldo']),
+        total_liquidacion=float(request.args['total_liquidacion']),
+        fecha_calculo=datetime.now()
+    )
+
+    ControladorLiquidaciones.EditarLiquidacion(liquidacion)
+    return f"La liquidación con ID {liquidacion.id} fue modificada exitosamente."
+

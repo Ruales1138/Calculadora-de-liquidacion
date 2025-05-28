@@ -129,3 +129,49 @@ class ControladorLiquidaciones:
             port=SecretConfig.PGPORT
         )
         return connection.cursor()
+    
+    @staticmethod
+    def EditarLiquidacion(liquidacion: Liquidacion):
+        """ Edita una liquidación existente en la base de datos por su ID """
+        cursor = ControladorLiquidaciones.ObtenerCursor()
+        cursor.execute("""
+            UPDATE liquidaciones SET
+                salario_base = %s,
+                aux_transporte = %s,
+                fecha_inicio = %s,
+                fecha_fin = %s,
+                dias_trabajados = %s,
+                anos_servicio = %s,
+                dias_vacaciones_pend = %s,
+                dias_prima = %s,
+                dias_cesantias = %s,
+                indemnizacion = %s,
+                vacaciones = %s,
+                cesantias = %s,
+                intereses_cesantias = %s,
+                prima = %s,
+                aguinaldo = %s,
+                total_liquidacion = %s,
+                fecha_calculo = %s
+            WHERE id = %s
+        """, (
+            liquidacion.salario_base,
+            liquidacion.aux_transporte,
+            liquidacion.fecha_inicio,
+            liquidacion.fecha_fin,
+            liquidacion.dias_trabajados,
+            liquidacion.anos_servicio,
+            liquidacion.dias_vacaciones_pend,
+            liquidacion.dias_prima,
+            liquidacion.dias_cesantias,
+            liquidacion.indemnizacion,
+            liquidacion.vacaciones,
+            liquidacion.cesantias,
+            liquidacion.intereses_cesantias,
+            liquidacion.prima,
+            liquidacion.aguinaldo,
+            liquidacion.total_liquidacion,
+            liquidacion.fecha_calculo,
+            liquidacion.id
+        ))
+        cursor.connection.commit()

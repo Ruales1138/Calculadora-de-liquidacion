@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Liquidación</title>
+</head>
+<body>
+    <a href="/" >Inicio</a>
+    <h1>Modificar Liquidación</h1>
+    <form action="/confirmar_modificacion" method="get">
+        <input type="hidden" name="id" value="{{ buscado.id }}">
+
+        <label>Salario Base:</label>
+        <input type="number" name="salario_base" value="{{ buscado.salario_base }}" step="0.01"><br>
+
+        <label>Auxilio de Transporte:</label>
+        <input type="number" name="aux_transporte" value="{{ buscado.aux_transporte }}" step="0.01"><br>
+
+        <label>Fecha de Inicio:</label>
+        <input type="date" name="fecha_inicio" value="{{ buscado.fecha_inicio.strftime('%Y-%m-%d') }}"><br>
+
+        <label>Fecha de Fin:</label>
+        <input type="date" name="fecha_fin" value="{{ buscado.fecha_fin.strftime('%Y-%m-%d') }}"><br>
+
+        <label>Días Vacaciones Pendientes:</label>
+        <input type="number" name="dias_vacaciones_pend" value="{{ buscado.dias_vacaciones_pend }}"><br>
+
+        <label>Días Prima:</label>
+        <input type="number" name="dias_prima" value="{{ buscado.dias_prima }}"><br>
+
+        <label>Días Cesantías:</label>
+        <input type="number" name="dias_cesantias" value="{{ buscado.dias_cesantias }}"><br>
+
+        <label>Indemnización:</label>
+        <input type="number" name="indemnizacion" value="{{ buscado.indemnizacion }}" step="0.01"><br>
+
+        <label>Vacaciones:</label>
+        <input type="number" name="vacaciones" value="{{ buscado.vacaciones }}" step="0.01"><br>
+
+        <label>Cesantías:</label>
+        <input type="number" name="cesantias" value="{{ buscado.cesantias }}" step="0.01"><br>
+
+        <label>Intereses Cesantías:</label>
+        <input type="number" name="intereses_cesantias" value="{{ buscado.intereses_cesantias }}" step="0.01"><br>
+
+        <label>Prima:</label>
+        <input type="number" name="prima" value="{{ buscado.prima }}" step="0.01"><br>
+
+        <label>Aguinaldo:</label>
+        <input type="number" name="aguinaldo" value="{{ buscado.aguinaldo }}" step="0.01"><br>
+
+        <label>Total Liquidación:</label>
+        <input type="number" name="total_liquidacion" value="{{ buscado.total_liquidacion }}" step="0.01"><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>
