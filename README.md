@@ -48,22 +48,50 @@ para llegar a unos resultados que se sumaran al final del proceso.
 ## 📂 Estructura del Proyecto
 
 * CALCULADORA-DE-LIQUIDACION/
-* ├── SQL/
+* ├── sql/
+* │ └── crear-conceptos_liquidacion.sql
+* │ └── crear-empleados.sql
+* │ └── crear-historial_salarios.sql
 * │ └── crear-liquidaciones.sql
 * ├── src/
+* ├── console/
+*  │ └── console.py
 * │ ├── controller/
-* │ │ └── liquidacion_controller.py
+* │ │ └── conceptos_liquidaciones_controller.py
+* │ │ └── empleados_controller.py
+* │ │ └── historial_salarios_controller.py
+* │ │ └── liquidaciones_controller.py
 * │ ├── model/
 * │ │ └── PaymentLogic.py
+* │ │ └── __init__.py
 * │ ├── model2/
+* │ │ └── conceptos_liquidaciones.py
+* │ │ └── empleados.py
+* │ │ └── historial_salarios.py
 * │ │ └── liquidacion.py
-* │ └── view/
-* │ └── interfaz.py
+* │ │ └── liquidaciones.py
+* │ ├── view/
+* │ │ └── interfaz.py
+* │ │ ├── web/
+* │ │ │ └── vista_liquidacion.py
+* │ ├── templates/
+* │ │ └── buscar.html
+* │ │ └── confirmacion.html
+* │ │ └── crear.html
+* │ │ └── index.html
+* │ │ └── insertar.html
+* │ │ └── lista.html
+* │ │ └── modificar.html
 * ├── tests/
-* │ └── test_liquidacion.py
-* ├── SecretConfig.py
-* ├── README.md
+* │ └── __init__.py
+* │ └── test_PaymentLogic.py
+* │ └── test_empleadosdb.py
 * ├── .gitignore
+* ├── Casos_de_prueba.xlsx
+* ├── README.md
+* ├── SecretConfig-sample.py
+* ├── app.py
+* ├── requirements.txt
 
 ## Cómo ejecutar la aplicación
 
