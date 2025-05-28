@@ -93,6 +93,44 @@ python src/view/interfaz.py
 
 * python -m unittest discover -s tests
 
+## Entregable de página web
+
+** ¿Cómo ejecutar la aplicación web?
+
+Para comenzar a utilizar la aplicación web, debes de instalar la libreria de Flask, con el siguiente comando:
+
+```
+pip install Flask
+```
+
+Luego ejecuta el siguiente comando desde la terminal:
+
+```
+python3 -m flask run --debug
+```
+
+**¿Cómo ejecutarlo desde Render.com?**
+
+Primero, tienes que ingresar a Render.com y crear una cuenta, luego crea un proyecto nuevo e ingresa los siguientes parámetros donde te los pida en la configuración del proyecto:
+
+En el build command, ingresa:
+```
+pip install -r requirements.txt
+```
+En Start Command ingresa:
+```
+flask run -p 10000 -h 0.0.0.0
+
+```
+Y cuando te pida url del proyecto ingresa el link de este proyecto de Github.
+
+Una vez hechos los pasos anteriores, inicializa la página y espera que se construya, una vez hecho eso, abre el link en una pestaña nueva y listo
+
+**Link del Render**
+
+.....
+
+
 ## Tecnologías usadas
 
 * Python 3.8+
