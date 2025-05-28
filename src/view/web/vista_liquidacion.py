@@ -6,6 +6,8 @@ import sys
 sys.path.append("src")
 from controller.liquidaciones_controller import ControladorLiquidaciones
 from model.PaymentLogic import PaymentLogic_Calculator
+from model2.liquidacion import Liquidacion
+from datetime import datetime, timedelta
 
 
 @blueprint.route("/")
@@ -31,22 +33,35 @@ def insertar():
 
 @blueprint.route('/confirmacion')
 def confirmacion():
-    # liquidacion = PaymentLogic_Calculator(
-    #     request.args['salario_base'], 
-    #     request.args['aux_transporte'], 
-    #     request.args['fecha_inicio'], 
-    #     request.args['fecha_fin'], 
-    #     request.args['dias_vacaciones_pend'], 
-    #     request.args['dias_prima'], 
-    #     request.args['dias_cesantias'])
-    
-    salario_base = 3000000
-    aux_transporte = 0
-    fecha_inicio = "01/06/2023"
-    fecha_fin = "31/12/2023"
-    dias_vacaciones_pend = 5
-    dias_prima = 90
-    dias_cesantias = 90
-    
-    liquidacion = PaymentLogic_Calculator(salario_base, aux_transporte, fecha_inicio, fecha_fin, dias_vacaciones_pend, dias_prima, dias_cesantias)
+    liquidacion = PaymentLogic_Calculator(
+        float(request.args['salario_base']), 
+        float(request.args['aux_transporte']), 
+        request.args['fecha_inicio'], 
+        request.args['fecha_fin'], 
+        int(request.args['dias_vacaciones_pend']), 
+        int(request.args['dias_prima']), 
+        int(request.args['dias_cesantias'])
+    )
+    base_date = datetime(2023, 1, 1)
+    liquidacion_2 = Liquidacion(
+                id=None,
+                salario_base=float(request.args['salario_base']),
+                aux_transporte=float(request.args['aux_transporte']),
+                fecha_inicio=base_date,
+                fecha_fin=base_date + timedelta(days=365),
+                dias_trabajados=365,
+                anos_servicio=1.0,
+                dias_vacaciones_pend=int(request.args['dias_vacaciones_pend']),
+                dias_prima=int(request.args['dias_prima']),
+                dias_cesantias=int(request.args['dias_cesantias']),
+                indemnizacion=1500000,
+                vacaciones=250000,
+                cesantias=400000,
+                intereses_cesantias=48000,
+                prima=400000,
+                aguinaldo=125000,
+                total_liquidacion=3725000,
+                fecha_calculo=datetime.now()
+            )
+    ControladorLiquidaciones.InsertarLiquidacion(liquidacion_2)
     return render_template('confirmacion.html', liquidacion=liquidacion.resumen_liquidacion())
